@@ -3,6 +3,8 @@
 Sirve el front estático (carpeta ./static) y expone el estado del servidor
 en /api/status para que el dashboard lo consulte.
 
+Activar el entorno de ejecución: source venv/bin/activate
+
 Ejecutar:  uvicorn main:app --host 0.0.0.0 --port 8000
 """
 
