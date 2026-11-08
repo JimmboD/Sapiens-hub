@@ -11,10 +11,9 @@
   <header class="topbar">
     <div class="wrap">
       <a class="brand" href="/">Sapiens Hub</a>
-      <nav aria-label="Principal">
-        <a href="#estado">Estado</a>
-        <a href="#proyectos">Proyectos</a>
-      </nav>
+      <div class="live" id="live" title="Conectando…" role="status">
+        <span class="dot"></span><span class="sr" id="live-text">Conectando…</span>
+      </div>
     </div>
   </header>
 
@@ -22,66 +21,64 @@
     <div class="hero">
       <div class="wrap">
         <h1>Ingeniería biomédica, animada con Python</h1>
-        <p>Animaciones en Manim para explicar matemáticas, redes neuronales para clasificar arritmias y procesamiento de bioseñales. Todo corre en este servidor casero.</p>
       </div>
-      <div class="pulse" role="img" aria-label="Trazo de ECG animado cuyo ritmo sube con la carga del procesador del servidor">
+      <div class="pulse" role="img" aria-label="Trazo de ECG animado cuyo ritmo sube con la carga del procesador">
         <canvas id="ecg"></canvas>
-        <div class="pulse-readout"><b id="bpm">--</b> lpm · CPU <span id="pulse-cpu">--</span>%</div>
+        <div class="pulse-readout" title="Pulso del servidor, según la carga del procesador">
+          <svg class="i sm"><use href="#i-heart-pulse"/></svg><b id="bpm">--</b><span>lpm</span>
+        </div>
       </div>
     </div>
 
     <section class="block wrap" id="estado" aria-labelledby="estado-t">
-      <div class="block-head">
-        <h2 id="estado-t">Estado del servidor</h2>
-        <div class="live" id="live"><span class="dot"></span><span id="live-text">Conectando…</span></div>
-      </div>
+      <h2 class="sr" id="estado-t">Estado del servidor</h2>
 
       <div class="metrics">
-        <div class="metric" data-tone="blue">
-          <h3>Procesador</h3>
+        <div class="metric" data-tone="blue" id="m-cpu">
+          <svg class="i"><use href="#i-cpu"/></svg>
           <div class="value"><span id="cpu-v">--</span><small>%</small></div>
-          <div class="detail" id="cpu-d">&nbsp;</div>
           <div class="bar"><i id="cpu-b"></i></div>
+          <span class="sr" id="cpu-d"></span>
         </div>
-        <div class="metric" data-tone="green">
-          <h3>Memoria RAM</h3>
+        <div class="metric" data-tone="green" id="m-ram">
+          <svg class="i"><use href="#i-ram"/></svg>
           <div class="value"><span id="ram-v">--</span><small>%</small></div>
-          <div class="detail" id="ram-d">&nbsp;</div>
           <div class="bar"><i id="ram-b"></i></div>
+          <span class="sr" id="ram-d"></span>
         </div>
-        <div class="metric" data-tone="gold">
-          <h3>Disco del sistema</h3>
+        <div class="metric" data-tone="gold" id="m-disk">
+          <svg class="i"><use href="#i-disk"/></svg>
           <div class="value"><span id="disk-v">--</span><small>%</small></div>
-          <div class="detail" id="disk-d">&nbsp;</div>
           <div class="bar"><i id="disk-b"></i></div>
+          <span class="sr" id="disk-d"></span>
         </div>
-        <div class="metric" data-tone="purple">
-          <h3>Memoria USB</h3>
+        <div class="metric" data-tone="purple" id="m-usb">
+          <svg class="i"><use href="#i-usb"/></svg>
           <div class="value"><span id="usb-v">--</span><small>%</small></div>
-          <div class="detail" id="usb-d">&nbsp;</div>
           <div class="bar"><i id="usb-b"></i></div>
+          <span class="sr" id="usb-d"></span>
         </div>
-        <div class="metric" data-tone="red">
-          <h3>Temperatura</h3>
+        <div class="metric" data-tone="red" id="m-temp">
+          <svg class="i"><use href="#i-thermometer"/></svg>
           <div class="value"><span id="temp-v">--</span><small>°C</small></div>
-          <div class="detail" id="temp-d">&nbsp;</div>
           <div class="bar"><i id="temp-b"></i></div>
+          <span class="sr" id="temp-d"></span>
         </div>
-        <div class="metric" data-tone="gold">
-          <h3>Batería</h3>
+        <div class="metric" data-tone="gold" id="m-bat">
+          <svg class="i" id="bat-i"><use href="#i-battery"/></svg>
           <div class="value"><span id="bat-v">--</span><small>%</small></div>
-          <div class="detail" id="bat-d">&nbsp;</div>
           <div class="bar"><i id="bat-b"></i></div>
+          <span class="sr" id="bat-d"></span>
         </div>
-        <div class="metric" data-tone="blue">
-          <h3>Red</h3>
+        <div class="metric" data-tone="blue" id="m-net">
+          <svg class="i"><use href="#i-net"/></svg>
           <div class="value"><span id="net-v">--</span></div>
           <div class="detail" id="net-d">&nbsp;</div>
         </div>
-        <div class="metric">
-          <h3>Tiempo encendido</h3>
+        <div class="metric" data-tone="green" id="m-up">
+          <svg class="i"><use href="#i-clock"/></svg>
           <div class="value"><span id="up-v">--</span></div>
-          <div class="detail" id="up-d">&nbsp;</div>
+          <span class="sr" id="up-d"></span>
         </div>
       </div>
 
@@ -92,17 +89,16 @@
     </section>
 
     <section class="block wrap" id="proyectos" aria-labelledby="proyectos-t">
-      <div class="block-head">
-        <h2 id="proyectos-t">Proyectos</h2>
-      </div>
+      <h2 class="sr" id="proyectos-t">Proyectos</h2>
       <ul class="projects" id="project-list"></ul>
     </section>
   </main>
 
   <footer>
-    <div class="wrap">Sapiens Hub · servidor casero con Debian 13</div>
+    <div class="wrap">Sapiens Hub · Debian 13</div>
   </footer>
 
+  <script src="/js/icons.js"></script>
   <script src="/js/ecg.js"></script>
   <script src="/js/app.js"></script>
 </body>
