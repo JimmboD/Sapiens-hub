@@ -68,5 +68,19 @@
     ],
     "puerto": null,
     "icono": "lattice"
+  },
+  {
+    "slug": "sapiens",
+    "titulo": "Sapiens",
+    "area": "Inteligencia artificial · LLMs",
+    "resumen": "Aplicación web que recibe consultas y genera respuestas mediante modelos grandes de lenguaje (LLMs).",
+    "estado": "en-desarrollo",
+    "etiquetas": [
+      "Python",
+      "LLMs",
+      "IA"
+    ],
+    "puerto": null,
+    "icono": "box"
   }
 ]
