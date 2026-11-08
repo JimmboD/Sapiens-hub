@@ -1,0 +1,139 @@
+/* Sapiens Hub: paleta tomada de Manim sobre fondo oscuro. */
+:root {
+  --bg: #16181d;
+  --surface: #1d2027;
+  --line: #2c303a;
+  --text: #e8e6e1;
+  --muted: #9aa0ab;
+  --blue: #58c4dd;
+  --red: #fc6255;
+  --green: #83c167;
+  --gold: #f0ac5f;
+  --purple: #9a72ac;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { color-scheme: dark; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+a { color: var(--blue); text-underline-offset: 3px; }
+a:hover { color: #8fdcef; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { width: min(1080px, 100% - 2rem); margin-inline: auto; }
+
+/* Barra superior */
+.topbar { border-bottom: 1px solid var(--line); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 0.9rem; }
+.brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: 0.01em; }
+.topbar nav { display: flex; gap: 1.4rem; font-size: 0.95rem; }
+.topbar nav a { color: var(--muted); text-decoration: none; }
+.topbar nav a:hover { color: var(--text); }
+
+/* Portada */
+.hero { padding-block: clamp(2.5rem, 7vw, 5rem) 0; }
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 5.2vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+  max-width: 18ch;
+}
+.hero p { color: var(--muted); max-width: 60ch; margin: 0 0 2rem; font-size: 1.08rem; }
+
+.pulse { position: relative; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #12141a; }
+.pulse canvas { display: block; width: 100%; height: 150px; }
+.pulse-readout {
+  position: absolute; top: 0.6rem; right: 1rem;
+  font-family: var(--mono); font-size: 0.85rem; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.pulse-readout b { color: var(--red); font-weight: 600; }
+
+/* Secciones */
+section.block { padding-block: clamp(2.5rem, 6vw, 4rem) 0; }
+.block-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.block-head h2 { font-family: var(--serif); font-size: 1.7rem; margin: 0; }
+.live { font-size: 0.9rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+.dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--muted); }
+.live.ok .dot { background: var(--green); }
+.live.bad .dot { background: var(--red); }
+
+/* Métricas */
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.75rem 2.5rem; }
+.metric { border-top: 2px solid var(--line); padding-top: 0.75rem; }
+.metric[data-tone="blue"] { border-top-color: var(--blue); }
+.metric[data-tone="green"] { border-top-color: var(--green); }
+.metric[data-tone="gold"] { border-top-color: var(--gold); }
+.metric[data-tone="red"] { border-top-color: var(--red); }
+.metric[data-tone="purple"] { border-top-color: var(--purple); }
+.metric h3 { font-size: 0.95rem; font-weight: 500; color: var(--muted); margin: 0 0 0.35rem; }
+.metric .value { font-family: var(--serif); font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.metric .value small { font-size: 1rem; font-weight: 400; color: var(--muted); margin-left: 0.2rem; }
+.metric .detail { color: var(--muted); font-size: 0.9rem; margin-top: 0.3rem; font-variant-numeric: tabular-nums; }
+.bar { height: 4px; background: var(--line); margin-top: 0.7rem; }
+.bar i { display: block; height: 100%; width: 0; background: var(--blue); transition: width 0.6s ease; }
+.metric[data-tone="green"] .bar i { background: var(--green); }
+.metric[data-tone="gold"] .bar i { background: var(--gold); }
+.metric[data-tone="red"] .bar i { background: var(--red); }
+.metric[data-tone="purple"] .bar i { background: var(--purple); }
+
+.notice { margin-top: 1.5rem; padding: 0.9rem 1rem; border-left: 3px solid var(--gold); background: var(--surface); color: var(--muted); font-size: 0.95rem; }
+.notice code { font-family: var(--mono); color: var(--text); }
+.notice[hidden] { display: none; }
+
+/* Lista de proyectos */
+.projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.project-row { border-bottom: 1px solid var(--line); }
+.project-row a {
+  display: grid; grid-template-columns: 4px 1fr auto; gap: 1.25rem; align-items: center;
+  padding: 1.25rem 0.25rem; text-decoration: none; color: var(--text);
+}
+.project-row a:hover { background: var(--surface); }
+.swatch { align-self: stretch; background: var(--c, var(--blue)); }
+.project-row h3 { font-family: var(--serif); font-size: 1.35rem; margin: 0; }
+.project-row .area { color: var(--muted); font-size: 0.92rem; margin: 0.15rem 0 0.5rem; }
+.project-row .summary { margin: 0; color: var(--text); max-width: 62ch; font-size: 0.98rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+.tag { font-size: 0.8rem; color: var(--muted); border: 1px solid var(--line); padding: 0.1rem 0.5rem; border-radius: 3px; }
+.state { font-size: 0.85rem; color: var(--muted); text-align: right; white-space: nowrap; }
+.state.on { color: var(--green); }
+.state.dev { color: var(--gold); }
+
+footer { margin-top: 4rem; border-top: 1px solid var(--line); padding-block: 1.5rem; color: var(--muted); font-size: 0.9rem; }
+
+/* Página de proyecto */
+.crumbs { padding-top: 1.5rem; font-size: 0.92rem; }
+.crumbs a { color: var(--muted); }
+.project-hero { padding-block: 2rem 0; border-left: 4px solid var(--c, var(--blue)); padding-left: 1.25rem; margin-top: 1.5rem; }
+.project-hero h1 { font-family: var(--serif); font-size: clamp(1.9rem, 4.5vw, 2.8rem); line-height: 1.1; margin: 0 0 0.5rem; }
+.project-hero .area { color: var(--muted); margin: 0 0 1rem; }
+.prose { max-width: 66ch; }
+.prose h2 { font-family: var(--serif); font-size: 1.4rem; margin: 2.2rem 0 0.6rem; }
+.prose p, .prose li { color: #cfcdc8; }
+.placeholder { border: 1px dashed var(--line); padding: 2rem 1.25rem; color: var(--muted); background: var(--surface); }
+.placeholder code { font-family: var(--mono); color: var(--text); }
+
+@media (max-width: 560px) {
+  .project-row a { grid-template-columns: 4px 1fr; }
+  .state { grid-column: 2; text-align: left; }
+  .pulse canvas { height: 120px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar i { transition: none; }
+}

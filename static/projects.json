@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "clasificador-arritmias",
+    "titulo": "Clasificador de arritmias",
+    "area": "Redes neuronales · ECG",
+    "resumen": "Red neuronal que clasifica latidos de ECG en distintos tipos de arritmia.",
+    "estado": "en-desarrollo",
+    "etiquetas": ["Python", "Deep Learning", "ECG"],
+    "puerto": 8001
+  },
+  {
+    "slug": "filtrado-emg",
+    "titulo": "Filtrado de EMG",
+    "area": "Bioseñales",
+    "resumen": "Acondicionamiento y filtrado de señales electromiográficas: ruido, rectificación y envolvente.",
+    "estado": "en-desarrollo",
+    "etiquetas": ["Python", "DSP", "EMG"],
+    "puerto": null
+  },
+  {
+    "slug": "analisis-numerico",
+    "titulo": "Análisis numérico",
+    "area": "Matemáticas · Manim",
+    "resumen": "Métodos numéricos explicados con animaciones hechas en Manim.",
+    "estado": "en-desarrollo",
+    "etiquetas": ["Manim", "Python", "Métodos numéricos"],
+    "puerto": null
+  },
+  {
+    "slug": "investigacion-de-operaciones",
+    "titulo": "Investigación de operaciones",
+    "area": "Optimización",
+    "resumen": "Modelos de optimización y programación lineal con visualizaciones animadas.",
+    "estado": "en-desarrollo",
+    "etiquetas": ["Optimización", "Manim", "Python"],
+    "puerto": null
+  },
+  {
+    "slug": "ingenieria-de-materiales",
+    "titulo": "Ingeniería de materiales",
+    "area": "Materiales",
+    "resumen": "Conceptos de ciencia e ingeniería de materiales apoyados en simulación y animación.",
+    "estado": "en-desarrollo",
+    "etiquetas": ["Materiales", "Manim", "Python"],
+    "puerto": null
+  }
+]
