@@ -1,4 +1,4 @@
-/* Sapiens Hub: interfaz en tarjetas. Paleta tomada de Manim sobre fondo oscuro. */
+/* Sapiens Hub: interfaz en tarjetas con barra de estado fija. Paleta tomada de Manim sobre fondo oscuro. */
 :root {
   --bg: #16181d;
   --surface: #1d2027;
@@ -18,7 +18,8 @@
 }
 
 * { box-sizing: border-box; }
-html { color-scheme: dark; scroll-behavior: smooth; }
+/* El margen superior deja ver los títulos al saltar a una sección bajo el encabezado fijo. */
+html { color-scheme: dark; scroll-behavior: smooth; scroll-padding-top: 6.5rem; }
 
 body {
   margin: 0;
@@ -45,17 +46,46 @@ a:hover { color: #8fdcef; }
   fill: none; stroke: currentColor; stroke-width: 1.6;
   stroke-linecap: round; stroke-linejoin: round;
 }
-.i.sm { width: 1.1rem; height: 1.1rem; }
+.i.sm { width: 1.05rem; height: 1.05rem; }
 .i.lg { width: 2.6rem; height: 2.6rem; stroke-width: 1.25; }
 
-/* Barra superior */
-.topbar { border-bottom: 1px solid var(--line); background: var(--surface-2); }
-.topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 0.85rem; }
+/* Encabezado fijo: navegación y barra de estado */
+.topbar { position: sticky; top: 0; z-index: 20; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.topbar-main { display: flex; align-items: center; justify-content: space-between; padding-block: 0.8rem; }
 .brand { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--text); text-decoration: none; }
 .brand .i { color: var(--red); }
 .topbar nav { display: flex; gap: 1.5rem; }
 .topbar nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
 .topbar nav a:hover { color: var(--text); }
+
+.statusbar { border-top: 1px solid var(--line); background: var(--surface); }
+.statusbar-inner {
+  display: flex; align-items: center; gap: 1.25rem;
+  padding-block: 0.55rem; overflow-x: auto; white-space: nowrap;
+  scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+}
+.stat {
+  position: relative; flex: none; display: inline-flex; align-items: center; gap: 0.4rem;
+  padding-bottom: 6px; font-size: 0.88rem; cursor: default;
+}
+.stat > .i { color: var(--tone, var(--muted)); }
+.stat-label { color: var(--muted); }
+.stat-value { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+.stat .mini { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.stat .mini i { display: block; height: 100%; width: 0; background: var(--tone, var(--blue)); transition: width 0.6s ease; }
+
+.stat.live { padding-bottom: 6px; padding-right: 1.25rem; border-right: 1px solid var(--line); color: var(--muted); }
+.stat.live.ok, .stat.live.bad { color: var(--text); }
+.dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--muted); flex: none; }
+.stat.live.ok .dot { background: var(--green); }
+.stat.live.bad .dot { background: var(--red); }
+.statusbar.stale .stat:not(.live) { opacity: 0.45; }
+
+[data-tone="blue"] { --tone: var(--blue); }
+[data-tone="green"] { --tone: var(--green); }
+[data-tone="gold"] { --tone: var(--gold); }
+[data-tone="red"] { --tone: var(--red); }
+[data-tone="purple"] { --tone: var(--purple); }
 
 /* Tarjetas */
 .card {
@@ -76,12 +106,6 @@ a:hover { color: #8fdcef; }
 .chip.lg { width: 3.4rem; height: 3.4rem; border-radius: 10px; }
 .chip.lg .i { width: 1.9rem; height: 1.9rem; stroke-width: 1.4; }
 
-[data-tone="blue"] { --tone: var(--blue); }
-[data-tone="green"] { --tone: var(--green); }
-[data-tone="gold"] { --tone: var(--gold); }
-[data-tone="red"] { --tone: var(--red); }
-[data-tone="purple"] { --tone: var(--purple); }
-
 /* Portada */
 .hero { padding-block: clamp(1.75rem, 5vw, 3.25rem) 0; }
 .hero-grid { display: grid; gap: 1.5rem; align-items: center; }
@@ -93,7 +117,6 @@ a:hover { color: #8fdcef; }
 }
 .hero p { color: var(--muted); margin: 0; max-width: 46ch; font-size: 1.05rem; }
 
-.pulse-card { --tone: var(--red); }
 .pulse-readout { margin-left: auto; font-family: var(--mono); font-size: 0.9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .pulse-readout b { color: var(--text); font-size: 1.15rem; }
 .pulse-canvas { margin-top: 0.9rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
@@ -104,30 +127,6 @@ a:hover { color: #8fdcef; }
 section.block { padding-top: clamp(2.25rem, 5vw, 3.5rem); }
 .block-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
 .block-head h2 { font-family: var(--serif); font-size: 1.6rem; margin: 0; }
-
-.pill {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  padding: 0.25rem 0.75rem; border: 1px solid var(--line); border-radius: 999px;
-  font-size: 0.88rem; color: var(--muted); background: var(--surface);
-}
-.pill time { font-variant-numeric: tabular-nums; }
-.dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--muted); flex: none; }
-.pill.ok { color: var(--text); }
-.pill.ok .dot { background: var(--green); }
-.pill.bad { color: var(--text); }
-.pill.bad .dot { background: var(--red); }
-
-/* Métricas */
-.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 1rem; }
-.metric .value {
-  margin-top: 0.9rem;
-  font-family: var(--serif); font-size: 2.1rem; font-weight: 700; line-height: 1.1;
-  font-variant-numeric: tabular-nums;
-}
-.metric .value small { font-size: 1rem; font-weight: 400; color: var(--muted); margin-left: 0.2rem; }
-.bar { height: 5px; margin-top: 0.8rem; background: var(--line); border-radius: 3px; overflow: hidden; }
-.bar i { display: block; height: 100%; width: 0; background: var(--tone, var(--blue)); border-radius: 3px; transition: width 0.6s ease; }
-.metric .detail { margin: 0.6rem 0 0; font-size: 0.88rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 .notice { margin-top: 1rem; padding: 0.85rem 1rem; border-left: 3px solid var(--gold); background: var(--surface); border-radius: 0 6px 6px 0; color: var(--muted); font-size: 0.92rem; }
 .notice code { font-family: var(--mono); color: var(--text); }
@@ -174,10 +173,11 @@ footer { margin-top: 4rem; border-top: 1px solid var(--line); background: var(--
 
 @media (max-width: 560px) {
   .topbar nav { gap: 1rem; }
+  .statusbar-inner { gap: 1rem; }
   .project-hero { flex-direction: column; gap: 0.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .bar i, .project { transition: none; }
+  .stat .mini i, .project { transition: none; }
 }
