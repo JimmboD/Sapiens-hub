@@ -5,6 +5,10 @@
   const COLORS = ["var(--red)", "var(--green)", "var(--blue)", "var(--gold)", "var(--purple)"];
   const $ = (id) => document.getElementById(id);
 
+  // Icono junto al nombre del sitio, igual que en la portada.
+  const brand = document.querySelector(".brand");
+  if (brand && !brand.querySelector("svg")) brand.prepend(window.makeIcon("heart-pulse", "i"));
+
   // Flecha de regreso en el enlace "Proyectos".
   const back = document.querySelector(".crumbs a");
   if (back) back.prepend(window.makeIcon("back", "i sm"));
