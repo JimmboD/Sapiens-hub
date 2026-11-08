@@ -1,4 +1,4 @@
-/* Tarjetas de proyectos de la portada. El estado del servidor lo maneja statusbar.js. */
+/* Tarjetas de proyectos de la portada. El estado del servidor lo maneja statuspanel.js. */
 (function () {
   const $ = (id) => document.getElementById(id);
 

@@ -12,7 +12,7 @@ static/
   projects.json         Registro de proyectos (una entrada por proyecto)
   css/style.css         Estilos (tema oscuro, paleta de Manim)
   js/app.js             Lista de proyectos de la portada
-  js/statusbar.js       Barra de estado fija (consulta /api/status)
+  js/statuspanel.js     Panel lateral de estado (consulta /api/status)
   js/ecg.js             Trazo de ECG ligado a la carga de CPU
   js/project.js         Datos de cada página de proyecto
   projects/<slug>/      Una carpeta por proyecto con su index.html
