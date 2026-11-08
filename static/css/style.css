@@ -122,6 +122,15 @@ a:hover { color: #8fdcef; }
 .part .detail { margin: 0.45rem 0 0; font-size: 0.84rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .part .detail:empty { display: none; }
 
+.power-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  width: 100%; height: 2.4rem; margin-top: 1rem;
+  border: 1px solid color-mix(in srgb, var(--red) 55%, var(--line)); border-radius: 8px;
+  background: transparent; color: var(--red); font: inherit; font-size: 0.9rem; cursor: pointer;
+}
+.power-btn:hover { background: color-mix(in srgb, var(--red) 14%, transparent); }
+.power-btn:disabled { opacity: 0.5; cursor: default; }
+
 /* El contenido se corre a la derecha cuando el panel está abierto en pantallas anchas. */
 main, footer { transition: margin-left 0.2s ease; }
 @media (min-width: 900px) {

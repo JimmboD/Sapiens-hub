@@ -8,14 +8,16 @@ Activar el entorno de ejecución: source venv/bin/activate
 Ejecutar:  uvicorn main:app --host 0.0.0.0 --port 8000
 """
 
+import hmac
 import os
 import platform
 import shutil
+import subprocess
 import time
 from pathlib import Path
 
 import psutil
-from fastapi import FastAPI
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.staticfiles import StaticFiles
 
 BASE_DIR = Path(__file__).parent
@@ -25,6 +27,10 @@ STATIC_DIR = BASE_DIR / "static"
 USB_PATH = os.environ.get("SAPIENS_USB_PATH", "/home/jimmbo/usb")
 
 app = FastAPI(title="Sapiens Hub")
+
+# Contraseña para apagar el servidor (variable de entorno SAPIENS_SHUTDOWN_TOKEN).
+# Si no está definida, el apagado queda deshabilitado.
+SHUTDOWN_TOKEN = os.environ.get("SAPIENS_SHUTDOWN_TOKEN", "")
 
 # Estado previo de la red para calcular velocidad (bytes/s) entre consultas.
 _last_net = {"t": time.time(), "sent": 0, "recv": 0}
@@ -101,6 +107,15 @@ def status():
         "ts": int(time.time()),
     }
 
+@app.post("/api/shutdown")
+def shutdown(x_token: str = Header(default="")):
+    ok = SHUTDOWN_TOKEN and hmac.compare_digest(
+        x_token.encode(), SHUTDOWN_TOKEN.encode()
+    )
+    if not ok:
+        raise HTTPException(status_code=403, detail="No autorizado")
+    subprocess.Popen(["sudo", "-n", "/usr/bin/systemctl", "poweroff"])
+    return {"ok": True}
 
 # El front va al final: las rutas /api/* tienen prioridad.
 app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")

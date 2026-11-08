@@ -60,6 +60,26 @@
   const list = el("div", "stat-list");
   panel.append(el("h2", null, "Estado del servidor"), live, hint, list);
 
+    // Botón de apagado
+  const off = el("button", "power-btn");
+  off.type = "button";
+  off.append(window.makeIcon("power", "i sm"), el("span", null, "Apagar servidor"));
+  off.addEventListener("click", async () => {
+    if (!confirm("¿Apagar el servidor? Tendrás que encenderlo físicamente.")) return;
+    const token = prompt("Contraseña de apagado:");
+    if (!token) return;
+    try {
+      const r = await fetch("/api/shutdown", { method: "POST", headers: { "X-Token": token } });
+      if (r.status === 403) { alert("Contraseña incorrecta."); return; }
+      if (!r.ok) throw new Error(r.status);
+      off.disabled = true;
+      liveText.textContent = "Apagando…";
+    } catch (e) {
+      alert("No se pudo apagar el servidor.");
+    }
+  });
+  panel.append(off);
+
   const backdrop = el("div", "panel-backdrop");
   backdrop.hidden = true;
 
